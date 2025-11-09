@@ -6,9 +6,10 @@ error() {
 }
 
 download() {
+  [ "$1" = "" ] && error "download 'url'"
+  [ "$2" = "" ] && error "download 'output'"
   local url=$1
   local output=$2
-  # TODO: validate args
   if command -v curl &> /dev/null; then
     curl -o $output --location $url
   elif command -v wget &> /dev/null; then
