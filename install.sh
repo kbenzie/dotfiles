@@ -18,14 +18,8 @@ download() {
   fi
 }
 
-# TODO: validate platform & arch work on all supported platforms
-platform=$(uname | tr '[:upper:]' '[:lower:]')
-arch=$(uname -m)
-# TODO: use version agnostic download link
-download https://github.com/kbenzie/tuck/releases/download/v0.2.1/tuck-v0.2.1-$platform-$arch.tar.gz ./tuck.tar.gz
-tar zxvf ./tuck.tar.gz tuck
-mv ./tuck ~/.local/bin/tuck
-rm ./tuck.tar.gz
+curl -sfL https://kbenzie.github.io/tuck/get.sh | sh
+export PATH=$HOME/.local/bin:$PATH
 
 tuck in neovim/neovim
 tuck in BurntSushi/ripgrep
