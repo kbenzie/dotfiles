@@ -46,7 +46,3 @@ zsh ~/.config/zsh/install.zsh
 
 git-clone-or-pull https://git.infektor.net/config/tmux.git ~/.config/tmux
 ~/.config/tmux/install.sh
-
-mkdir -p ~/.local/bin
-mkdir -p ~/.local/share/man/man1
-mkdir -p ~/.local/share/zsh/site-functions
