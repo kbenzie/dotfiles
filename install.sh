@@ -29,6 +29,24 @@ git-clone-or-pull() {
   fi
 }
 
+symlink() {
+  local source=$1
+  local dest=$2
+  if [ -L $dest ]; then
+    local target=`readlink $dest`
+    if [ "$target" != "$source" ]; then
+      rm $dest
+      ln -s $source $dest
+      echo changed replace incorrect symlink $dest
+    fi
+  elif [ -f $dest ]; then
+    error symlink failed $dest exists but is a regular file
+  else
+    ln -s $source $dest
+    echo changed created symlink $dest
+  fi
+}
+
 curl -sfL https://kbenzie.github.io/tuck/get.sh | sh
 export PATH=$HOME/.local/bin:$PATH
 
@@ -47,3 +65,8 @@ zsh ~/.config/zsh/install.zsh
 
 git-clone-or-pull https://git.infektor.net/config/tmux.git ~/.config/tmux
 ~/.config/tmux/install.sh
+
+curl -o- https://fnm.vercel.app/install | bash -s -- --install-dir ~/.local/bin --skip-shell
+fnm install --lts
+symlink ~/.local/share/fnm/aliases/default/bin/node ~/.local/bin/node
+symlink ~/.local/share/fnm/aliases/default/bin/npm ~/.local/bin/npm
