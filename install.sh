@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 error() {
   echo "$1 not found" >&2
   exit 1
@@ -54,6 +56,7 @@ tuck in neovim/neovim
 tuck in BurntSushi/ripgrep
 tuck in junegunn/fzf
 tuck in sharkdp/bat
+tuck in Schniz/fnm
 
 download https://git.infektor.net/config/local/raw/branch/main/roles/bash/templates/bashrc ~/.bashrc
 download https://git.infektor.net/config/local/raw/branch/main/roles/readline/templates/inputrc ~/.inputrc
@@ -61,12 +64,11 @@ download https://git.infektor.net/config/local/raw/branch/main/roles/readline/te
 git-clone-or-pull https://git.infektor.net/config/nvim.git ~/.config/nvim
 
 git-clone-or-pull https://git.infektor.net/config/zsh.git ~/.config/zsh
-zsh ~/.config/zsh/install.zsh
+~/.config/zsh/install.zsh
 
 git-clone-or-pull https://git.infektor.net/config/tmux.git ~/.config/tmux
 ~/.config/tmux/install.sh
 
-curl -o- https://fnm.vercel.app/install | bash -s -- --install-dir ~/.local/bin --skip-shell
-fnm install --lts
+fnm install --latest
 symlink ~/.local/share/fnm/aliases/default/bin/node ~/.local/bin/node
 symlink ~/.local/share/fnm/aliases/default/bin/npm ~/.local/bin/npm
