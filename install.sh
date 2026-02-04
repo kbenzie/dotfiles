@@ -72,3 +72,5 @@ git-clone-or-pull https://git.infektor.net/config/tmux.git ~/.config/tmux
 fnm install --latest
 symlink ~/.local/share/fnm/aliases/default/bin/node ~/.local/bin/node
 symlink ~/.local/share/fnm/aliases/default/bin/npm ~/.local/bin/npm
+
+git-clone-or-pull https://git.infektor.net/config/git.git ~/.config/git
