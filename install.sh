@@ -3,13 +3,13 @@
 set -e
 
 error() {
-  echo "$1 not found" >&2
+  echo "error: $1" >&2
   exit 1
 }
 
 download() {
-  [ "$1" = "" ] && error "download 'url'"
-  [ "$2" = "" ] && error "download 'output'"
+  [ "$1" = "" ] && error "url argument not found"
+  [ "$2" = "" ] && error "output argument not found"
   local url=$1
   local output=$2
   if command -v curl &> /dev/null; then
@@ -39,13 +39,13 @@ symlink() {
     if [ "$target" != "$source" ]; then
       rm $dest
       ln -s $source $dest
-      echo changed replace incorrect symlink $dest
+      echo "changed replace incorrect symlink $dest"
     fi
   elif [ -f $dest ]; then
-    error symlink failed $dest exists but is a regular file
+    error "symlink failed $dest exists but is a regular file"
   else
     ln -s $source $dest
-    echo changed created symlink $dest
+    echo "changed created symlink $dest"
   fi
 }
 
